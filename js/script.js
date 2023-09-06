@@ -109,4 +109,30 @@ function touchEnd(event) {
     word.style.transition = '';
 }
 
+function drop(event) {
+    event.preventDefault();
+    const word = event.dataTransfer.getData('text/plain');
+    const targetWord = event.target.getAttribute('data-word');
+
+    if (word === targetWord) {
+        score += 10;
+        scoreDisplay.textContent = score;
+        event.target.appendChild(document.createTextNode(word));
+        event.dataTransfer.clearData();
+
+        // Hide the matched word
+        const matchedWord = document.querySelector(`.word[data-word="${word}"]`);
+        matchedWord.style.display = 'none';
+
+        if (score >= level * 40) {
+            level++;
+            showNextLevelPopup();
+        }
+    } else {
+        score -= 5;
+        scoreDisplay.textContent = score;
+        showWrongPopup();
+    }
+}
+
 
