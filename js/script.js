@@ -8,11 +8,17 @@ words.forEach(word => {
     word.addEventListener('mousedown', mouseDown);
     word.addEventListener('mouseup', mouseUp);
     word.addEventListener('dragstart', dragStart);
+    word.addEventListener('touchstart', touchStart);
+    word.addEventListener('touchend', touchEnd);
+    word.addEventListener('dragstart', dragStart);
+    word.addEventListener('touchmove', allowDrop);
+    word.addEventListener('touchend', handleDrop); // Use the consolidated function
+    word.addEventListener('drop', handleDrop); // Use the consolidated function
 });
 
 targetImages.forEach(image => {
     image.addEventListener('dragover', allowDrop);
-    image.addEventListener('drop', drop);
+    image.addEventListener('drop', handleDrop); // Use the consolidated function
 });
 
 function mouseDown(event) {
@@ -31,72 +37,6 @@ function dragStart(event) {
     event.dataTransfer.setData('text/plain', event.target.textContent);
 }
 
-function allowDrop(event) {
-    event.preventDefault();
-}
-
-function drop(event) {
-    event.preventDefault();
-    const word = event.dataTransfer.getData('text/plain');
-    const targetWord = event.target.getAttribute('data-word');
-
-    if (word === targetWord) {
-        score += 10;
-        scoreDisplay.textContent = score;
-        event.target.appendChild(document.createTextNode(word));
-        event.dataTransfer.clearData();
-
-        if (score >= level * 40) {
-            level++;
-            showNextLevelPopup();
-        }
-    } else {
-        score -= 5;
-        scoreDisplay.textContent = score;
-    }
-}
-
-// ... (previous code)
-
-function showNextLevelPopup() {
-    const popup = document.createElement('div');
-    popup.classList.add('popup');
-    popup.innerHTML = `
-        <div class="popup-content">
-            <p>Congratulations! Level ${level} unlocked!</p>
-        </div>
-    `;
-    document.body.appendChild(popup);
-
-    // Redirect to the next level page after a delay
-    setTimeout(() => {
-        window.location.href = `level${level}.html`;
-    }, 2000); // Redirect after 3 seconds (adjust as needed)
-}
-
-function showWrongPopup() {
-    const popup = document.createElement('div');
-    popup.classList.add('popup', 'wrong-popup');
-    popup.textContent = 'Wrong! -5';
-    document.body.appendChild(popup);
-
-    // Remove the popup after a delay
-    setTimeout(() => {
-        popup.remove();
-    }, 2000); // Remove after 2 seconds (adjust as needed)
-}
-
-words.forEach(word => {
-    word.addEventListener('touchstart', touchStart);
-    word.addEventListener('touchend', touchEnd);
-    word.addEventListener('dragstart', dragStart);
-});
-
-targetImages.forEach(image => {
-    image.addEventListener('touchmove', allowDrop);
-    image.addEventListener('touchend', drop);
-});
-
 function touchStart(event) {
     const word = event.target;
     word.classList.add('flying');
@@ -109,7 +49,11 @@ function touchEnd(event) {
     word.style.transition = '';
 }
 
-function drop(event) {
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+function handleDrop(event) {
     event.preventDefault();
     const word = event.dataTransfer.getData('text/plain');
     const targetWord = event.target.getAttribute('data-word');
@@ -120,19 +64,51 @@ function drop(event) {
         event.target.appendChild(document.createTextNode(word));
         event.dataTransfer.clearData();
 
-        // Hide the matched word
-        const matchedWord = document.querySelector(`.word[data-word="${word}"]`);
-        matchedWord.style.display = 'none';
-
-        if (score >= level * 40) {
+        if (score >= 40 && level === 1) {
+            // Redirect to level2.html when score reaches 40 for the first time
+            window.location.href = 'level2.html';
+        } else if (score >= level * 40) {
             level++;
             showNextLevelPopup();
         }
     } else {
+        showWrongPopup(); // Show wrong pop-up when a wrong match occurs
         score -= 5;
         scoreDisplay.textContent = score;
-        showWrongPopup();
     }
 }
+
+function showWrongPopup() {
+    const popup = document.createElement('div');
+    popup.classList.add('popup', 'wrong-popup');
+    popup.textContent = 'Wrong! -5';
+    
+    // Add CSS styles to make the text white and bigger
+    popup.style.color = 'white';
+    popup.style.fontSize = '24px'; // You can adjust the size as needed
+    
+    document.body.appendChild(popup);
+
+    // Remove the popup after a delay
+    setTimeout(() => {
+        popup.remove();
+    }, 2000); // Remove after 2 seconds (adjust as needed)
+}
+
+// function showNextLevelPopup() {
+//     const popup = document.createElement('div');
+//     popup.classList.add('popup');
+//     popup.innerHTML = `
+//         <div class="popup-content">
+//             <p>Congratulations! Level ${level} unlocked!</p>
+//         </div>
+//     `;
+//     document.body.appendChild(popup);
+
+//     // Remove the popup after a delay
+//     setTimeout(() => {
+//         popup.remove();
+//     }, 2000); // Remove after 2 seconds (adjust as needed)
+// }
 
 

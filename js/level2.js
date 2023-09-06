@@ -55,6 +55,11 @@ function showWrongPopup() {
     const popup = document.createElement('div');
     popup.classList.add('popup', 'wrong-popup');
     popup.textContent = 'Wrong! -5';
+    
+    // Add CSS styles to make the text white and bigger
+    popup.style.color = 'white';
+    popup.style.fontSize = '24px'; // You can adjust the size as needed
+    
     document.body.appendChild(popup);
 
     // Remove the popup after a delay
@@ -62,6 +67,8 @@ function showWrongPopup() {
         popup.remove();
     }, 2000); // Remove after 2 seconds (adjust as needed)
 }
+
+
 
 words.forEach(word => {
     word.addEventListener('touchstart', touchStart);
@@ -85,4 +92,17 @@ function touchEnd(event) {
     word.classList.remove('flying');
     word.style.transition = '';
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const popup = document.getElementById('popup');
+    
+    // Show the popup
+    popup.style.display = 'block';
+    
+    // Remove the popup after 2 seconds
+    setTimeout(() => {
+        popup.style.display = 'none';
+    }, 2000);
+});
+
 
