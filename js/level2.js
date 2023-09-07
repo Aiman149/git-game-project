@@ -1,11 +1,15 @@
+// JavaScript (level2.js)
+
 const words = document.querySelectorAll('.word');
 const targetImages = document.querySelectorAll('.target-image');
 const scoreDisplay = document.getElementById('score');
+const gameContainer = document.querySelector('.game-container');
+
 let score = 0;
+let totalWords = words.length;
+let correctWords = 0;
 
 words.forEach(word => {
-    word.addEventListener('mousedown', mouseDown);
-    word.addEventListener('mouseup', mouseUp);
     word.addEventListener('dragstart', dragStart);
 });
 
@@ -14,20 +18,10 @@ targetImages.forEach(image => {
     image.addEventListener('drop', drop);
 });
 
-function mouseDown(event) {
+function dragStart(event) {
     const word = event.target;
     word.classList.add('flying');
-    word.style.transition = 'none';
-}
-
-function mouseUp(event) {
-    const word = event.target;
-    word.classList.remove('flying');
-    word.style.transition = '';
-}
-
-function dragStart(event) {
-    event.dataTransfer.setData('text/plain', event.target.textContent);
+    event.dataTransfer.setData('text/plain', word.textContent);
 }
 
 function allowDrop(event) {
@@ -36,73 +30,48 @@ function allowDrop(event) {
 
 function drop(event) {
     event.preventDefault();
+    const targetImage = event.target;
     const word = event.dataTransfer.getData('text/plain');
-    const targetWord = event.target.getAttribute('data-word');
+    const targetWord = targetImage.getAttribute('data-word');
 
     if (word === targetWord) {
         score += 10;
-        scoreDisplay.textContent = score;
-        event.target.appendChild(document.createTextNode(word));
-        event.dataTransfer.clearData();
+        correctWords++;
+
+        // Hide the word after it's been successfully dropped
+        event.target.style.visibility = 'hidden';
     } else {
-        showWrongPopup(); // Show wrong pop-up when a wrong match occurs
-        score -= 5;
-        scoreDisplay.textContent = score;
+        score -= 10; // Deduct 10 points for a wrong match
+    }
+
+    scoreDisplay.textContent = score;
+
+    if (correctWords === totalWords) {
+        // Calculate and display the score percentage
+        const percentage = (score / (totalWords * 10)) * 100;
+        showScorePopup(percentage);
     }
 }
 
-function showWrongPopup() {
+
+function showScorePopup(percentage) {
     const popup = document.createElement('div');
-    popup.classList.add('popup', 'wrong-popup');
-    popup.textContent = 'Wrong! -5';
-    
-    // Add CSS styles to make the text white and bigger
-    popup.style.color = 'white';
-    popup.style.fontSize = '24px'; // You can adjust the size as needed
-    
+    popup.classList.add('popup');
+    popup.innerHTML = `
+        <div class="popup-content">
+            <p>Congratulations! You scored ${percentage.toFixed(2)}%</p>
+        </div>
+    `;
     document.body.appendChild(popup);
-
-    // Remove the popup after a delay
-    setTimeout(() => {
-        popup.remove();
-    }, 2000); // Remove after 2 seconds (adjust as needed)
 }
 
-
-
-words.forEach(word => {
-    word.addEventListener('touchstart', touchStart);
-    word.addEventListener('touchend', touchEnd);
-    word.addEventListener('dragstart', dragStart);
-});
-
-targetImages.forEach(image => {
-    image.addEventListener('touchmove', allowDrop);
-    image.addEventListener('touchend', drop);
-});
-
-function touchStart(event) {
-    const word = event.target;
-    word.classList.add('flying');
-    word.style.transition = 'none';
+// Function to reset the game (if needed)
+function resetGame() {
+    words.forEach(word => {
+        word.classList.remove('flying');
+        word.style.visibility = 'visible';
+    });
+    score = 0;
+    correctWords = 0;
+    scoreDisplay.textContent = 0;
 }
-
-function touchEnd(event) {
-    const word = event.target;
-    word.classList.remove('flying');
-    word.style.transition = '';
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const popup = document.getElementById('popup');
-    
-    // Show the popup
-    popup.style.display = 'block';
-    
-    // Remove the popup after 2 seconds
-    setTimeout(() => {
-        popup.style.display = 'none';
-    }, 2000);
-});
-
-
