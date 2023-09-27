@@ -39,9 +39,10 @@ function drop(event) {
         correctWords++;
 
         // Hide the word after it's been successfully dropped
-        event.target.style.visibility = 'hidden';
+        targetImage.style.visibility = 'hidden';
     } else {
-        score -= 10; // Deduct 10 points for a wrong match
+        score -= 5; // Deduct 5 points for a wrong match
+        showWrongPopup(); // Show the wrong pop-up for wrong matches
     }
 
     scoreDisplay.textContent = score;
@@ -52,6 +53,23 @@ function drop(event) {
         showScorePopup(percentage);
     }
 }
+
+function showWrongPopup() {
+    const popup = document.createElement('div');
+    popup.classList.add('popup', 'wrong-popup');
+    popup.innerHTML = `
+        <div class="popup-content">
+            <p>Wrong! -5</p>
+        </div>
+    `;
+    document.body.appendChild(popup);
+
+    // Remove the wrong pop-up after a delay
+    setTimeout(() => {
+        popup.remove();
+    }, 2000); // Remove after 2 seconds (adjust as needed)
+}
+
 
 
 function showScorePopup(percentage) {
