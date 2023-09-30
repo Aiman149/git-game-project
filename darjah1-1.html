@@ -20,17 +20,43 @@
     <div class="game-container">
         <table class="word-table">
             <tr>
-                <td class="word" draggable="true">Apple</td>
-                <td class="word" draggable="true">Banana</td>
-                <td class="word" draggable="true">Grape</td>
+                <td class="word" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)" ontouchend="handleTouchEnd(event)">Apple</td>
+                <td class="word" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)" ontouchend="handleTouchEnd(event)">Banana</td>
+                <td class="word" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)" ontouchend="handleTouchEnd(event)">Grape</td>
             </tr>
             <tr>
-                <td class="word" draggable="true">Watermelon</td>
-                <td class="word" draggable="true">Coconut</td>
-                <td class="word" draggable="true">Papaya</td>
+                <td class="word" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)" ontouchend="handleTouchEnd(event)">Watermelon</td>
+                <td class="word" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)" ontouchend="handleTouchEnd(event)">Coconut</td>
+                <td class="word" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)" ontouchend="handleTouchEnd(event)">Papaya</td>
             </tr>
         </table>
-    </div>    
+    </div>
+    
+    <script>
+        let isDragging = false;
+        let dragTarget = null;
+    
+        function handleTouchStart(event) {
+            isDragging = true;
+            dragTarget = event.target;
+            event.preventDefault();
+        }
+    
+        function handleTouchMove(event) {
+            if (!isDragging) return;
+            // Prevent scrolling while dragging
+            event.preventDefault();
+        }
+    
+        function handleTouchEnd(event) {
+            if (!isDragging) return;
+            // Implement your logic here for what to do when the drag ends
+            // You can use dragTarget to identify the dragged element
+            isDragging = false;
+            dragTarget = null;
+        }
+    </script>
+    
     
     </div>
     <div class="image-container">
