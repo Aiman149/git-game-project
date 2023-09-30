@@ -17,6 +17,25 @@
     </style>
 </head>
 <body>
+    <center>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <p>Congratulations! Go to the next level</p>
+            </div>
+        </div>
+    </center>
+    <script>
+        // JavaScript to display the popup for 2 seconds
+        var popup = document.getElementById("popup");
+
+        // Display the popup
+        popup.style.display = "block";
+
+        // Set a timeout to hide the popup after 2 seconds
+        setTimeout(function() {
+            popup.style.display = "none";
+        }, 2000); // 2000 milliseconds = 2 seconds
+    </script>
     <div class="game-container">
         <table class="word-table">
             <tr>
@@ -26,19 +45,20 @@
             </tr>
             <tr>
                 <td class="word" draggable="true">Watermelon</td>
-                <td class="word" draggable="true">Orange</td>
-                <td class="word" draggable="true">Strawberry</td>
+                <td class="word" draggable="true">Coconut</td>
+                <td class="word" draggable="true">Papaya</td>
             </tr>
         </table>
-    </div>
-    
+    </div>    
         <!-- Add more words here -->
     </div>
     <div class="image-container">
         <img class="target-image" data-word="Apple" src="img/apple.jpg" alt="Apple">
         <img class="target-image" data-word="Banana" src="img/banana.png" alt="Banana">
-        <img class="target-image" data-word="Grape" src="img/grape.png" alt="Grape">
-        <img class="target-image" data-word="Watermelon" src="img/watermelon" alt="Watermelon">
+        <img class="target-image" data-word="Grape" src="img/grape.jpg" alt="Grape">
+        <img class="target-image" data-word="Watermelon" src="img/watermelon.jpg" alt="Watermelon">
+        <img class="target-image" data-word="Coconut" src="img/coconut.jpg" alt="Coconut">
+        <img class="target-image" data-word="Papaya" src="img/papaya.jpg" alt="Papaya">
         <!-- Add more images here -->
     </div>
     <div class="score">Score: <span id="score">0</span></div>

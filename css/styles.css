@@ -58,7 +58,7 @@ html, body {
     max-width: 150px;
     height: auto;
     margin: 5px;
-    border: 1px solid #ddd;
+    border: 0px solid #ddd;
     cursor: pointer;
     opacity: 1; /* Initial opacity */
     transition: opacity 0.3s ease-in-out; /* Transition for opacity changes */
