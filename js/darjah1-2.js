@@ -75,7 +75,7 @@ function handleDrop(event) {
             if (areAllImagesHidden()) {
                 if (level === 1) {
                     // Redirect to level2.html when all images are hidden in level 1
-                    window.location.href = 'darjah1-2.html';
+                    window.location.href = 'darjah1-3.html';
                 }
                 // Add similar checks for other levels here if needed
             }
@@ -143,7 +143,7 @@ function showNextLevelPopup() {
         popup.remove();
 
         if (level === 2) {
-            window.location.href = 'darjah1-2.html'; // Redirect to level 2 page
+            window.location.href = 'darjah1-3.html'; // Redirect to level 2 page
         } else if (level === 3) {
             // Add more level transitions here
             window.location.href = 'level3.html'; // Redirect to level 3 page, etc.

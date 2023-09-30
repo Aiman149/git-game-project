@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/styles.css">
-        <script src="js/level2.js" defer></script>
-        <title>Level 2</title>
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/darjah1-2.js" defer></script>
+    <title>Matching Game</title>
+    <style>
         body {
             background-image: url('img/bck.jpg'); /* Replace 'bck.jpg' with your image file path */
             background-size: cover; /* Adjust as needed */
@@ -15,46 +15,32 @@
             /* Additional background styles */
         }
     </style>
-    </head>
-    <body>
-        <center>
-            <div id="popup" class="popup">
-                <div class="popup-content">
-                    <p>Congratulations! Go to the next level</p>
-                </div>
-            </div>
-        </center>
-        <script>
-            // JavaScript to display the popup for 2 seconds
-            var popup = document.getElementById("popup");
+</head>
+<body>
+    <div class="game-container">
+        <table class="word-table">
+            <tr>
+                <td class="word" draggable="true">Apple</td>
+                <td class="word" draggable="true">Banana</td>
+                <td class="word" draggable="true">Grape</td>
+            </tr>
+            <tr>
+                <td class="word" draggable="true">Watermelon</td>
+                <td class="word" draggable="true">Orange</td>
+                <td class="word" draggable="true">Strawberry</td>
+            </tr>
+        </table>
+    </div>
     
-            // Display the popup
-            popup.style.display = "block";
-    
-            // Set a timeout to hide the popup after 2 seconds
-            setTimeout(function() {
-                popup.style.display = "none";
-            }, 2000); // 2000 milliseconds = 2 seconds
-        </script>
-        <div class="game-container">
-            <div class="word" draggable="true">Orange</div>
-            <div class="word" draggable="true">Grapes</div>
-            <div class="word" draggable="true">Pear</div>
-            <div class="word" draggable="true">Watermelon</div>
-            <div class="word" draggable="true">Pineapple</div>
-        </div>
-        <div class="image-container">
-            <img class="target-image" data-word="Orange" src="img/orange.png"
-                alt="Orange">
-            <img class="target-image" data-word="Grapes" src="img/grapes.png"
-                alt="Grapes">
-            <img class="target-image" data-word="Pear" src="img/pear.png"
-                alt="Pear">
-            <img class="target-image" data-word="Watermelon"
-                src="img/watermelon.png" alt="Watermelon">
-            <img class="target-image" data-word="Pineapple"
-                src="img/pineapple.png" alt="Pineapple">
-        </div>
-        <div class="score">Score: <span id="score">0</span></div>
-    </body>
+        <!-- Add more words here -->
+    </div>
+    <div class="image-container">
+        <img class="target-image" data-word="Apple" src="img/apple.jpg" alt="Apple">
+        <img class="target-image" data-word="Banana" src="img/banana.png" alt="Banana">
+        <img class="target-image" data-word="Grape" src="img/grape.png" alt="Grape">
+        <img class="target-image" data-word="Watermelon" src="img/watermelon" alt="Watermelon">
+        <!-- Add more images here -->
+    </div>
+    <div class="score">Score: <span id="score">0</span></div>
+</body>
 </html>
