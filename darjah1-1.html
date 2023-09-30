@@ -20,43 +20,32 @@
     <div class="game-container">
         <table class="word-table">
             <tr>
-                <td class="word" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)" ontouchend="handleTouchEnd(event)">Apple</td>
-                <td class="word" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)" ontouchend="handleTouchEnd(event)">Banana</td>
-                <td class="word" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)" ontouchend="handleTouchEnd(event)">Grape</td>
+                <td class="word draggable">Apple</td>
+                <td class="word draggable">Banana</td>
+                <td class="word draggable">Grape</td>
             </tr>
             <tr>
-                <td class="word" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)" ontouchend="handleTouchEnd(event)">Watermelon</td>
-                <td class="word" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)" ontouchend="handleTouchEnd(event)">Coconut</td>
-                <td class="word" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)" ontouchend="handleTouchEnd(event)">Papaya</td>
+                <td class="word draggable">Watermelon</td>
+                <td class="word draggable">Coconut</td>
+                <td class="word draggable">Papaya</td>
             </tr>
         </table>
-    </div>
-    
+    </div> 
     <script>
-        let isDragging = false;
-        let dragTarget = null;
+        interact('.draggable')
+            .draggable({
+                onmove: function (event) {
+                    const target = event.target;
+                    const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+                    const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
     
-        function handleTouchStart(event) {
-            isDragging = true;
-            dragTarget = event.target;
-            event.preventDefault();
-        }
-    
-        function handleTouchMove(event) {
-            if (!isDragging) return;
-            // Prevent scrolling while dragging
-            event.preventDefault();
-        }
-    
-        function handleTouchEnd(event) {
-            if (!isDragging) return;
-            // Implement your logic here for what to do when the drag ends
-            // You can use dragTarget to identify the dragged element
-            isDragging = false;
-            dragTarget = null;
-        }
+                    target.style.transform = `translate(${x}px, ${y}px)`;
+                    target.setAttribute('data-x', x);
+                    target.setAttribute('data-y', y);
+                }
+            });
     </script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
     
     </div>
     <div class="image-container">
