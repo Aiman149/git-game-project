@@ -3,14 +3,14 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 177.7778%; /* 100% * (16 / 9) = 177.7778% */
+    height: 125%; /* 100% * (5 / 4) = 125% */
     font-family: Arial, sans-serif;
 }
 
 /* Style the game container */
 .game-container {
     width: 80%;
-    margin: 11.1111% auto 0; /* 6.25% top margin */
+    margin: 10% auto 0; /* 10% top margin */
 }
 
 .word-table {
@@ -47,7 +47,7 @@ html, body {
     max-width: 100%;
     overflow-x: auto;
     padding: 10px;
-    margin: 11.1111% auto 0; /* 6.25% top margin */
+    margin: 10% auto 0; /* 10% top margin */
 }
 
 /* Style to arrange images in two columns */
@@ -88,7 +88,7 @@ html, body {
 }
 
 .score {
-    margin-top: 11.1111%; /* 6.25% top margin */
+    margin-top: 10%; /* 10% top margin */
     font-size: 24px; /* Increased font size for a bigger appearance */
     text-align: center; /* Center align the score */
     background-color: #f7b731; /* Yellow background */
