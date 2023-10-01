@@ -44,9 +44,8 @@
             <div class="word" draggable="true">Coconut</div>
             <div class="word" draggable="true">Papaya</div>
         </div>
-    </div>    
-    
     </div>
+
     <div class="image-container">
         <img class="target-image" data-word="Apple" src="img/apple.jpg" alt="Apple">
         <img class="target-image" data-word="Banana" src="img/banana.png" alt="Banana">
@@ -55,6 +54,92 @@
         <img class="target-image" data-word="Coconut" src="img/coconut.jpg" alt="Coconut">
         <img class="target-image" data-word="Papaya" src="img/papaya.jpg" alt="Papaya">
     </div>
+
     <div class="score">Score: <span id="score">0</span></div>
+
+    <script>
+        const words = document.querySelectorAll('.word');
+        const targetImages = document.querySelectorAll('.target-image');
+        const scoreDisplay = document.getElementById('score');
+        let score = 0;
+
+        words.forEach(word => {
+            word.addEventListener('dragstart', dragStart);
+            word.addEventListener('dragend', dragEnd);
+        });
+
+        targetImages.forEach(image => {
+            image.addEventListener('dragover', dragOver);
+            image.addEventListener('dragenter', dragEnter);
+            image.addEventListener('dragleave', dragLeave);
+            image.addEventListener('drop', drop);
+        });
+
+        // Keep track of the number of hidden images
+        let hiddenImageCount = 0;
+
+        // Drag and drop event functions
+        function dragStart() {
+            this.classList.add('dragging');
+        }
+
+        function dragEnd() {
+            this.classList.remove('dragging');
+        }
+
+        function dragOver(event) {
+            event.preventDefault();
+        }
+
+        function dragEnter(event) {
+            event.preventDefault();
+            this.classList.add('dragover');
+        }
+
+        function dragLeave() {
+            this.classList.remove('dragover');
+        }
+
+        function drop() {
+            this.classList.remove('dragover');
+            const word = document.querySelector('.dragging');
+            
+            // Check if the dropped word matches the target image's data-word attribute
+            if (this.getAttribute('data-word') === word.textContent) {
+                this.style.visibility = 'hidden';
+                score += 10;
+                scoreDisplay.textContent = score;
+                hiddenImageCount++;
+
+                // Check if all images are hidden
+                if (hiddenImageCount === targetImages.length) {
+                    // Redirect to the next level after a delay
+                    setTimeout(() => {
+                        window.location.href = 'darjah1-2.html';
+                    }, 1000); // Redirect after 1 second (adjust as needed)
+                }
+            } else {
+                showWrongPopup();
+                score -= 5;
+                scoreDisplay.textContent = score;
+            }
+        }
+
+        function showWrongPopup() {
+            const popup = document.createElement('div');
+            popup.classList.add('popup', 'wrong-popup');
+            popup.innerHTML = `
+                <div class="popup-content">
+                    <p>Wrong! -5</p>
+                </div>
+            `;
+            document.body.appendChild(popup);
+
+            // Remove the wrong pop-up after a delay
+            setTimeout(() => {
+                popup.remove();
+            }, 2000); // Remove after 2 seconds (adjust as needed)
+        }
+    </script>
 </body>
 </html>

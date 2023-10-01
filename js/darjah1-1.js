@@ -5,102 +5,57 @@ let score = 0;
 let level = 1;
 
 words.forEach(word => {
-    word.addEventListener('mousedown', mouseDown);
-    word.addEventListener('mouseup', mouseUp);
-    word.addEventListener('dragstart', dragStart);
-    word.addEventListener('touchstart', touchStart);
-    word.addEventListener('touchend', touchEnd);
-    word.addEventListener('dragstart', dragStart);
-    word.addEventListener('touchmove', allowDrop);
-    word.addEventListener('touchend', handleDrop); // Use the consolidated function
-    word.addEventListener('drop', handleDrop); // Use the consolidated function
+    word.addEventListener('click', handleWordClick);
 });
 
 targetImages.forEach(image => {
-    image.addEventListener('dragover', allowDrop);
-    image.addEventListener('drop', handleDrop); // Use the consolidated function
+    image.addEventListener('click', handleImageClick);
 });
 
-function mouseDown(event) {
+function handleWordClick(event) {
     const word = event.target;
-    word.classList.add('flying');
-    word.style.transition = 'none';
-}
+    const wordText = word.textContent;
 
-function mouseUp(event) {
-    const word = event.target;
-    word.classList.remove('flying');
-    word.style.transition = '';
-}
+    const matchingImage = document.querySelector(`[data-word="${wordText}"]`);
 
-function dragStart(event) {
-    event.dataTransfer.setData('text/plain', event.target.textContent);
-}
+    if (matchingImage) {
+        // Correct match, hide the image
+        matchingImage.style.display = 'none';
 
-function touchStart(event) {
-    const word = event.target;
-    word.classList.add('flying');
-    word.style.transition = 'none';
-}
+        score += 10; // Add 10 points for a correct match
+        scoreDisplay.textContent = score;
 
-function touchEnd(event) {
-    const word = event.target;
-    word.classList.remove('flying');
-    word.style.transition = '';
-}
-
-function allowDrop(event) {
-    event.preventDefault();
-}
-
-function handleDrop(event) {
-    event.preventDefault();
-
-    const draggedItem = event.dataTransfer.getData('text/plain');
-    const target = event.target;
-
-    if (target.classList.contains('target-image')) {
-        // Handle image drops
-        const targetWord = target.getAttribute('data-word');
-
-        if (draggedItem === targetWord) {
-            // Correct match, hide the image
-            target.style.display = 'none';
-
-            score += 10; // Add 10 points for a correct match
-            scoreDisplay.textContent = score;
-            event.dataTransfer.clearData();
-
-            // Check if all images are hidden
-            if (areAllImagesHidden()) {
-                if (level === 1) {
-                    // Redirect to level2.html when all images are hidden in level 1
-                    window.location.href = 'darjah1-2.html';
-                }
-                // Add similar checks for other levels here if needed
+        // Check if all images are hidden
+        if (areAllImagesHidden()) {
+            if (level === 1) {
+                // Redirect to level2.html when all images are hidden in level 1
+                window.location.href = 'darjah1-2.html';
             }
-        } else {
-            showWrongPopup();
-            score -= 5; // Deduct 5 points for a wrong match
-            scoreDisplay.textContent = score;
+            // Add similar checks for other levels here if needed
         }
-    } else if (target.classList.contains('word')) {
-        // Handle word drops
-        const targetWord = target.textContent;
-        const targetImage = document.querySelector(`[data-word="${targetWord}"]`);
+    } else {
+        showWrongPopup();
+        score -= 5; // Deduct 5 points for a wrong match
+        scoreDisplay.textContent = score;
+    }
+}
 
-        if (draggedItem === targetWord) {
-            // Correct match, hide the image
-            targetImage.style.display = 'none';
+function handleImageClick(event) {
+    const image = event.target;
+    const wordText = image.getAttribute('data-word');
 
-            score += 10; // Add 10 points for a correct match
-            scoreDisplay.textContent = score;
-            event.dataTransfer.clearData();
-        } else {
-            showWrongPopup();
-            score -= 5; // Deduct 5 points for a wrong match
-            scoreDisplay.textContent = score;
-        }
+    const matchingWord = document.querySelector(`.word:contains('${wordText}')`);
+
+    if (matchingWord) {
+        // Correct match, hide the image
+        image.style.display = 'none';
+
+        score += 10; // Add 10 points for a correct match
+        scoreDisplay.textContent = score;
+    } else {
+        showWrongPopup();
+        score -= 5; // Deduct 5 points for a wrong match
+        scoreDisplay.textContent = score;
     }
 }
 
@@ -110,15 +65,8 @@ function areAllImagesHidden() {
     return hiddenImages.length === targetImages.length;
 }
 
-
 function showWrongPopup() {
-    const popup = document.createElement('div');
-    popup.classList.add('popup', 'wrong-popup');
-    popup.innerHTML = `
-        <div class="popup-content">
-            <p>Wrong! -5</p>
-        </div>
-    `;
+    const popup = createPopup('Wrong! -5');
     document.body.appendChild(popup);
 
     // Remove the wrong pop-up after a delay
@@ -127,10 +75,19 @@ function showWrongPopup() {
     }, 2000); // Remove after 2 seconds (adjust as needed)
 }
 
-function showNextLevelPopup() {
+function createPopup(message) {
     const popup = document.createElement('div');
-    popup.classList.add('popup', 'next-level-popup');
-    popup.textContent = `Congratulations! Level ${level} unlocked!`;
+    popup.classList.add('popup', 'wrong-popup');
+    popup.innerHTML = `
+        <div class="popup-content">
+            <p>${message}</p>
+        </div>
+    `;
+    return popup;
+}
+
+function showNextLevelPopup() {
+    const popup = createPopup(`Congratulations! Level ${level} unlocked!`);
 
     // Add CSS styles to make the text white and bigger
     popup.style.color = 'white';
