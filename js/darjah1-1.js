@@ -4,17 +4,17 @@ const scoreDisplay = document.getElementById('score');
 let score = 0;
 let level = 1;
 
-words.forEach(word => {
-    word.addEventListener('mousedown', mouseDown);
-    word.addEventListener('mouseup', mouseUp);
-    word.addEventListener('dragstart', dragStart);
-    word.addEventListener('touchstart', touchStart);
-    word.addEventListener('touchend', touchEnd);
-    word.addEventListener('dragstart', dragStart);
-    word.addEventListener('touchmove', allowDrop);
-    word.addEventListener('touchend', handleDrop); // Use the consolidated function
-    word.addEventListener('drop', handleDrop); // Use the consolidated function
-});
+// words.forEach(word => {
+//     word.addEventListener('mousedown', mouseDown);
+//     word.addEventListener('mouseup', mouseUp);
+//     word.addEventListener('dragstart', dragStart);
+//     word.addEventListener('touchstart', touchStart);
+//     word.addEventListener('touchend', touchEnd);
+//     word.addEventListener('dragstart', dragStart);
+//     word.addEventListener('touchmove', allowDrop);
+//     word.addEventListener('touchend', handleDrop); // Use the consolidated function
+//     word.addEventListener('drop', handleDrop); // Use the consolidated function
+// });
 
 targetImages.forEach(image => {
     image.addEventListener('dragover', allowDrop);
