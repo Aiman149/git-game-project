@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/styles.css">
-        <!-- <script src="js/darjah1-1.js" defer></script> -->
         <script
             src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
         <link href="https://cdn.wijmo.com/5.latest/styles/wijmo.min.css"
@@ -23,24 +22,18 @@
             type="text/javascript"></script>
         <script src="https://cdn.wijmo.com/5.latest/controls/wijmo.olap.min.js"
             type="text/javascript"></script>
-
-        <!-- Wijmo-Angular interop -->
         <script
             src="https://cdn.wijmo.com/5.latest/interop/angular/wijmo.angular.min.js"
             type="text/javascript"></script>
-
-        <!-- app scripts/styles -->
-        <!-- <link href="app.css" rel="stylesheet" /> -->
         <script src="js/DragDropTouch.js"></script>
         <script src="js/app.js"></script>
         <title>Matching Game</title>
         <style>
         body {
-            background-image: url('img/darjah1/bck.jpg'); /* Replace 'bck.jpg' with your image file path */
-            background-size: cover; /* Adjust as needed */
+            background-image: url('img/darjah1/bck.jpg');
+            background-size: cover;
             background-repeat: no-repeat;
-            background-attachment: fixed; /* Keeps the background fixed while scrolling */
-            /* Additional background styles */
+            background-attachment: fixed;
         }
     </style>
     </head>
@@ -53,16 +46,13 @@
             </div>
         </center>
         <script>
-        // JavaScript to display the popup for 2 seconds
         var popup = document.getElementById("popup");
 
-        // Display the popup
         popup.style.display = "block";
 
-        // Set a timeout to hide the popup after 2 seconds
         setTimeout(function() {
             popup.style.display = "none";
-        }, 2000); // 2000 milliseconds = 2 seconds
+        }, 2000);
     </script>
         <div class="game-container">
             <div class="word-row">
@@ -95,18 +85,13 @@
         <div class="score">Score: <span id="score">0</span></div>
 
         <script>
-        // Constants for DOM elements
         const words = document.querySelectorAll('.word');
         const targetImages = document.querySelectorAll('.target-image');
         let score = parseInt(localStorage.getItem('score3')) || 0;
 
-        // Update the score display
         const scoreDisplay = document.getElementById('score');
         scoreDisplay.textContent = `Score: ${score}`;
 
-        // Your existing drag and drop code goes here
-
-        // Update the score and store it in localStorage when needed
         function updateScore(delta) {
             score += delta;
             scoreDisplay.textContent = `Score: ${score}`;
@@ -114,13 +99,11 @@
         }
         let hiddenImageCount = 0;
     
-        // Event listeners for words
         words.forEach(word => {
             word.addEventListener('dragstart', dragStart);
             word.addEventListener('dragend', dragEnd);
         });
     
-        // Event listeners for target images
         targetImages.forEach(image => {
             image.addEventListener('dragover', dragOver);
             image.addEventListener('dragenter', dragEnter);
@@ -128,7 +111,6 @@
             image.addEventListener('drop', drop);
         });
     
-        // Drag and drop event functions
         function dragStart() {
             this.classList.add('dragging');
         }
@@ -154,14 +136,12 @@
             this.classList.remove('dragover');
             const word = document.querySelector('.dragging');
     
-            // Check if the dropped word matches the target image's data-word attribute
             if (this.getAttribute('data-word') === word.textContent) {
                 this.style.visibility = 'hidden';
                 score += 10;
                 scoreDisplay.textContent = score;
                 hiddenImageCount++;
     
-                // Check if all images are hidden
                 if (hiddenImageCount === targetImages.length) {
                     calculateAndDisplayTotalScore();
                 }
@@ -182,10 +162,9 @@
             `;
             document.body.appendChild(popup);
     
-            // Remove the wrong pop-up after a delay
             setTimeout(() => {
                 popup.remove();
-            }, 2000); // Remove after 2 seconds (adjust as needed)
+            }, 2000);
         }
     </script>
 
