@@ -29,4 +29,5 @@ Explain how to install your project or any dependencies it may have. You can pro
 
 ```bash
 # Example installation steps
-npm install your-package-name
+npm install 
+npm run dev
