@@ -38,6 +38,10 @@
     </style>
     </head>
     <body>
+
+        <audio src="sound/sound1.wav" id="correctSound"></audio>
+        <audio src="sound/sound2.wav" id="wrongSound"></audio>
+
         <div class="game-container">
             <div class="word-row">
                 <div class="word" draggable="true">Apple</div>
@@ -131,6 +135,9 @@
                     score += 10;
                     scoreDisplay.textContent = `Score: ${score}`;
                     hiddenImageCount++;
+
+                    const correctSound = document.getElementById('correctSound');
+                    correctSound.play();
     
                     if (hiddenImageCount === targetImages.length) {
                         localStorage.setItem('score1', score);
@@ -140,6 +147,9 @@
                     showWrongPopup();
                     score -= 5;
                     scoreDisplay.textContent = `Score: ${score}`;
+
+                    const wrongSound = document.getElementById('wrongSound');
+                    wrongSound.play();
                 }
             }
     

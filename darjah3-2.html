@@ -33,6 +33,10 @@
     </style>
 </head>
 <body>
+
+    <audio src="sound/sound1.wav" id="correctSound"></audio>
+    <audio src="sound/sound2.wav" id="wrongSound"></audio>
+
     <center>
         <div id="popup" class="popup">
             <div class="popup-content">
@@ -140,6 +144,9 @@
                 score += 10;
                 scoreDisplay.textContent = score;
                 hiddenImageCount++;
+
+                const correctSound = document.getElementById('correctSound');
+                correctSound.play();
     
                 // Check if all images are hidden
                 if (hiddenImageCount === targetImages.length) {
@@ -152,6 +159,9 @@
                 showWrongPopup();
                 score -= 5;
                 scoreDisplay.textContent = score;
+
+                const wrongSound = document.getElementById('wrongSound');
+                wrongSound.play();
             }
         }
     

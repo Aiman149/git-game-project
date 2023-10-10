@@ -45,6 +45,10 @@
     </style>
     </head>
     <body>
+
+        <audio id="correctSound" src="sound/sound1.wav"></audio>
+        <audio id="wrongSound" src="sound/sound2.wav"></audio>
+
         <center>
             <div id="popup" class="popup">
                 <div class="popup-content">
@@ -77,12 +81,18 @@
             </div>
         </div>
         <div class="image-container">
-            <img class="target-image" data-word="Kari" src="img/darjah3/kari.jpg" alt="Kari">
-            <img class="target-image" data-word="Nasi Goreng" src="img/darjah3/nasigoreng.jpg" alt="Nasi Goreng">
-            <img class="target-image" data-word="Nasi Lemak" src="img/darjah3/nasilemak.jpg" alt="Nasi Lemak">
-            <img class="target-image" data-word="Popia" src="img/darjah3/popia.jpeg" alt="Popia">
-            <img class="target-image" data-word="Salad" src="img/darjah3/salad.jpg" alt="Salad">
-            <img class="target-image" data-word="Sushi" src="img/darjah3/sushi.jpg" alt="Sushi">
+            <img class="target-image" data-word="Kari"
+                src="img/darjah3/kari.jpg" alt="Kari">
+            <img class="target-image" data-word="Nasi Goreng"
+                src="img/darjah3/nasigoreng.jpg" alt="Nasi Goreng">
+            <img class="target-image" data-word="Nasi Lemak"
+                src="img/darjah3/nasilemak.jpg" alt="Nasi Lemak">
+            <img class="target-image" data-word="Popia"
+                src="img/darjah3/popia.jpeg" alt="Popia">
+            <img class="target-image" data-word="Salad"
+                src="img/darjah3/salad.jpg" alt="Salad">
+            <img class="target-image" data-word="Sushi"
+                src="img/darjah3/sushi.jpg" alt="Sushi">
         </div>
         <div class="score">Score: <span id="score">0</span></div>
         <script>
@@ -144,14 +154,18 @@
         function drop() {
             this.classList.remove('dragover');
             const word = document.querySelector('.dragging');
-    
+
             // Check if the dropped word matches the target image's data-word attribute
             if (this.getAttribute('data-word') === word.textContent) {
                 this.style.visibility = 'hidden';
                 score += 10;
                 scoreDisplay.textContent = score;
                 hiddenImageCount++;
-    
+
+                // Play the correct sound
+                const correctSound = document.getElementById('correctSound');
+                correctSound.play();
+
                 // Check if all images are hidden
                 if (hiddenImageCount === targetImages.length) {
                     calculateAndDisplayTotalScore();
@@ -160,8 +174,13 @@
                 showWrongPopup();
                 score -= 5;
                 scoreDisplay.textContent = score;
+
+                // Play the wrong sound
+                const wrongSound = document.getElementById('wrongSound');
+                wrongSound.play();
             }
         }
+
     
         function showWrongPopup() {
             const popup = document.createElement('div');
