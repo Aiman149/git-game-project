@@ -1,13 +1,11 @@
-/* Reset some default styles and provide a mobile-friendly viewport */
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 125%; /* 100% * (5 / 4) = 125% */
+    height: 125%;
     font-family: Arial, sans-serif;
 }
 
-/* Style the game container */
 .game-container {
     width: 80%;
     margin: 50px auto 0;
@@ -48,7 +46,6 @@ html, body {
         margin-bottom: 0;
     }
 }
-/* Style the target images */
 .image-container {
     display: flex;
     flex-wrap: wrap;
@@ -57,27 +54,24 @@ html, body {
     max-width: 100%;
     overflow-x: auto;
     padding: 10px;
-    margin: 10% auto 0; /* 10% top margin */
+    margin: 10% auto 0;
 }
 
-/* Style to arrange images in two columns */
 .target-image {
-    width: 48%; /* 48% width to create two columns for images */
+    width: 48%;
     max-width: 150px;
     height: auto;
     margin: 5px;
     border: 0px solid #ddd;
     cursor: pointer;
-    opacity: 1; /* Initial opacity */
-    transition: opacity 0.3s ease-in-out; /* Transition for opacity changes */
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
 }
 
-/* Add a hover effect to the images */
 .target-image:hover {
-    opacity: 0.7; /* Reduce opacity on hover */
+    opacity: 0.7;
 }
 
-/* Clear the floated images for better layout */
 .target-image::after {
     content: "";
     display: table;
@@ -85,27 +79,26 @@ html, body {
 }
 
 @media (min-width: 768px) {
-    /* Adjust layout for larger screens (tablets and above) */
     .word {
-        width: auto; /* Reset width for words on larger screens */
+        width: auto;
     }
     .game-container {
         flex-direction: row;
     }
     .image-container {
-        flex-basis: 50%; /* Half of the available width for images */
+        flex-basis: 50%;
     }
 }
 
 .score {
-    margin-top: 10%; /* 10% top margin */
-    font-size: 24px; /* Increased font size for a bigger appearance */
-    text-align: center; /* Center align the score */
-    background-color: #f7b731; /* Yellow background */
-    color: #fff; /* White text color */
-    padding: 10px 20px; /* Added padding for better visual appearance */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Drop shadow */
+    margin-top: 10%;
+    font-size: 24px;
+    text-align: center;
+    background-color: #f7b731;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 .popup {
@@ -126,26 +119,17 @@ html, body {
     text-align: center;
     padding: 20px;
     background-color: #fafafa;
-    /* Background color for the popup */
     color: rgb(0, 0, 0);
-    /* Text color for the popup */
     border-radius: 5px;
-    /* Add rounded corners to the popup */
     position: relative;
     margin: auto;
-    /* Center the content horizontally */
     display: inline-block;
-    /* This is important for centering */
 }
 
 .popup-content p {
     font-size: 24px;
-    /* Adjust the font size as needed */
 }
 
-/* Add this CSS for the flying animation and popup */
 .word.flying {
     animation: float 1s infinite alternate;
 }
-
-/* Rest of the CSS remains the same */

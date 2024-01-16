@@ -87,6 +87,7 @@
         </div>
 
         <div class="score">Score: <span id="score">0</span></div>
+        <div class="score"><a href="main.html">Home</a></div>
 
         <script>
         const words = document.querySelectorAll('.word');
@@ -94,11 +95,11 @@
         let score = parseInt(localStorage.getItem('score3')) || 0;
 
         const scoreDisplay = document.getElementById('score');
-        scoreDisplay.textContent = `Score: ${score}`;
+        // scoreDisplay.textContent = `Score: ${score}`;
 
         function updateScore(delta) {
             score += delta;
-            scoreDisplay.textContent = `Score: ${score}`;
+            // scoreDisplay.textContent = `Score: ${score}`;
             localStorage.setItem('score3', score);
         }
         let hiddenImageCount = 0;
@@ -143,7 +144,7 @@
             if (this.getAttribute('data-word') === word.textContent) {
                 this.style.visibility = 'hidden';
                 score += 10;
-                scoreDisplay.textContent = score;
+                // scoreDisplay.textContent = score;
                 hiddenImageCount++;
 
                 const correctSound = document.getElementById('correctSound');
@@ -155,7 +156,7 @@
             } else {
                 showWrongPopup();
                 score -= 5;
-                scoreDisplay.textContent = score;
+                // scoreDisplay.textContent = score;
 
                 const wrongSound = document.getElementById('wrongSound');
                 wrongSound.play();

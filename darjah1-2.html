@@ -94,11 +94,13 @@
         const targetImages = document.querySelectorAll('.target-image');
         let score = parseInt(localStorage.getItem('score2')) || 0;
         const scoreDisplay = document.getElementById('score');
-        scoreDisplay.textContent = `Score: ${score}`;
+        // scoreDisplay.textContent = `Score: ${score}`;
+        scoreDisplay.textContent = `Score(Testing):`;
 
         function updateScore(delta) {
             score += delta;
-            scoreDisplay.textContent = `Score: ${score}`;
+            // scoreDisplay.textContent = `Score: ${score}`;
+            scoreDisplay.textContent = `Score(Testing):`;
             localStorage.setItem('score2', score);
         }
         words.forEach(word => {
@@ -143,7 +145,7 @@
             if (this.getAttribute('data-word') === word.textContent) {
                 this.style.visibility = 'hidden';
                 score += 10;
-                scoreDisplay.textContent = score;
+                // scoreDisplay.textContent = score;
                 hiddenImageCount++;
 
                 const correctSound = document.getElementById('correctSound');
@@ -157,7 +159,7 @@
             } else {
                 showWrongPopup();
                 score -= 5;
-                scoreDisplay.textContent = score;
+                // scoreDisplay.textContent = score;
 
                 const wrongSound = document.getElementById('wrongSound');
                 wrongSound.play();

@@ -87,14 +87,14 @@
 
         // Update the score display
         const scoreDisplay = document.getElementById('score');
-        scoreDisplay.textContent = `Score: ${score}`;
+        // scoreDisplay.textContent = `Score: ${score}`;
 
         // Your existing drag and drop code goes here
 
         // Update the score and store it in localStorage when needed
         function updateScore(delta) {
             score += delta;
-            scoreDisplay.textContent = `Score: ${score}`;
+            // scoreDisplay.textContent = `Score: ${score}`;
             localStorage.setItem('score2', score);
         }
         words.forEach(word => {
@@ -142,7 +142,7 @@
             if (this.getAttribute('data-word') === word.textContent) {
                 this.style.visibility = 'hidden';
                 score += 10;
-                scoreDisplay.textContent = score;
+                // scoreDisplay.textContent = score;
                 hiddenImageCount++;
 
                 const correctSound = document.getElementById('correctSound');
@@ -158,7 +158,7 @@
             } else {
                 showWrongPopup();
                 score -= 5;
-                scoreDisplay.textContent = score;
+                // scoreDisplay.textContent = score;
 
                 const wrongSound = document.getElementById('wrongSound');
                 wrongSound.play();
