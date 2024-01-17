@@ -1,10 +1,27 @@
 body {
     display: flex;
+    flex-direction: column; /* Change flex direction to column */
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
+}
+
+h2 {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    opacity: 0.8;
+    margin: 0;
+}
+
+h3 {
+    text-align: center;
+    padding: 20px;
+    background-color: #fbff0a;
+    opacity: 0.8;
+    margin: 0;
 }
 
 .container {
