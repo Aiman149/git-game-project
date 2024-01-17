@@ -95,12 +95,12 @@
         let score = parseInt(localStorage.getItem('score2')) || 0;
         const scoreDisplay = document.getElementById('score');
         // scoreDisplay.textContent = `Score: ${score}`;
-        scoreDisplay.textContent = `Score(Testing):`;
+        scoreDisplay.textContent = `Proses Percubaan`;
 
         function updateScore(delta) {
             score += delta;
             // scoreDisplay.textContent = `Score: ${score}`;
-            scoreDisplay.textContent = `Score(Testing):`;
+            scoreDisplay.textContent = `Proses Percubaan`;
             localStorage.setItem('score2', score);
         }
         words.forEach(word => {
@@ -171,7 +171,7 @@
             popup.classList.add('popup', 'wrong-popup');
             popup.innerHTML = `
                 <div class="popup-content">
-                    <p>Wrong! -5</p>
+                    <p>Salah! -5</p>
                 </div>
             `;
             document.body.appendChild(popup);

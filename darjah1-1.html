@@ -84,12 +84,12 @@
 
         const scoreDisplay = document.getElementById('score');
         // scoreDisplay.textContent = `Score: ${score}`;
-        scoreDisplay.textContent = `Score(Testing):`;
+        scoreDisplay.textContent = `Proses Percubaan`;
 
         function updateScore(delta) {
             score += delta;
             // scoreDisplay.textContent = `Score: ${score}`;
-            scoreDisplay.textContent = `Score(Testing):`;
+            scoreDisplay.textContent = `Proses Percubaan`;
             localStorage.setItem('score1', score);
         }
 
@@ -136,7 +136,7 @@
                     this.style.visibility = 'hidden';
                     score += 0;
                     // scoreDisplay.textContent = `Score: ${score}`;
-                    scoreDisplay.textContent = `Score(Testing):`;
+                    scoreDisplay.textContent = `Proses Percubaan`;
                     hiddenImageCount++;
 
                     const correctSound = document.getElementById('correctSound');
@@ -150,7 +150,7 @@
                     showWrongPopup();
                     score -= 0;
                     // scoreDisplay.textContent = `Score: ${score}`;
-                    scoreDisplay.textContent = `Score(Testing):`;
+                    scoreDisplay.textContent = `Proses Percubaan`;
 
                     const wrongSound = document.getElementById('wrongSound');
                     wrongSound.play();
@@ -162,7 +162,7 @@
                 popup.classList.add('popup', 'wrong-popup');
                 popup.innerHTML = `
                     <div class="popup-content">
-                        <p>Wrong! -5</p>
+                        <p>Salah! -5</p>
                     </div>
                 `;
                 document.body.appendChild(popup);
